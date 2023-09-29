@@ -100,3 +100,27 @@ export const getWineByCountryState = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const searchWines = async (req, res) => {
+  try {
+    const query = req.query.query;
+    const  regex = new RegExp(query, "i");
+
+    const wines = await WineData.find({
+      $or: [
+        { WineName: regex },
+        { CountryState: regex },
+        { Region: regex },
+        { ProductType: regex },
+        { VarietalType: regex },
+        { Description: regex },
+      ],
+    });
+
+    res.json(wines);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while searching for wines" });
+  }
+};

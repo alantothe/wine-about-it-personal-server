@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 mongoose.set("returnOriginal", false);
 
-const connectString = process.env.MONGO_URI;
+const connectString =
+  "mongodb+srv://alanmalpartida:fresh123@cluster0.p9oa6fo.mongodb.net/Wine?retryWrites=true&w=majority";
 
 mongoose.connect(connectString).catch((err) => {
   console.error("Error connecting to database", err);
